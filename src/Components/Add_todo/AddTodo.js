@@ -1,31 +1,35 @@
 import { connect } from 'react-redux'
 import './AddTodo.css'
-import { saveTodoValueOnChange, addTodo } from "../../store/actions";
+import { addTodo } from "../../store/actions";
+import { useState } from 'react';
 
 
 
 
-function AddTodo({ title, todoValueOnChange, addNewTodo }) {
-    let newTodo = { title: title }
+function AddTodo({ addNewTodo }) {
+    const [todoValue, setTodoValue] = useState("")
+    const todoValueOnChange = (value) => {
+        setTodoValue(value)
+    }
+
+    const addTodo = () => {
+        let newTodo = { title: todoValue }
+        addNewTodo(newTodo)
+        setTodoValue("")
+    }
 
     return (
         <div>
-            <input onChange={(e) => todoValueOnChange(e.target.value)} type="text" placeholder="Enter todo" />
-            <button onClick={() => {
-                addNewTodo(newTodo)
-            }}>Add Todo</button>
+            <input onChange={(e) => todoValueOnChange(e.target.value)} type="text" value={todoValue} placeholder="Enter todo" />
+            <button onClick={addTodo}>Add Todo</button>
         </div>
     )
 }
 
-const mapStateToProps = (state) => ({
-    title: state.todoTitleValue
-})
 
 const mapDispatchToProps = (dispatch) => ({
-    todoValueOnChange: (value) => dispatch(saveTodoValueOnChange(value)),
-
+    
     addNewTodo: (todo) => dispatch(addTodo(todo))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
+export default connect(null, mapDispatchToProps)(AddTodo);

@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
+import { deleteTodo } from '../../store/actions'
 import './Render-todos.css'
 
-function RenderTodos({ todos }) {
+function RenderTodos({ todos, removeTodo }) {
     console.log("render=>>", todos)
 
     return (
@@ -10,7 +11,7 @@ function RenderTodos({ todos }) {
 
             <div>{todos.map((todo, index) => {
                 return <div key={index}>
-                    <li>{index}: <h3>{todo.title}</h3></li>
+                    <li>{index + 1}: <h3>{todo.title}</h3><button onClick={() => removeTodo(todos, index)}>Delete</button></li>
                 </div>
             })}</div>
         </div>
@@ -21,4 +22,7 @@ const mapStateToProps = (state) => ({
     todos: state.todos
 })
 
-export default connect(mapStateToProps)(RenderTodos);
+const mapDispatchToProps = (dispatch) => ({
+    removeTodo: (todos, index) => dispatch(deleteTodo(todos, index))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(RenderTodos);
