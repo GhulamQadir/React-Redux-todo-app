@@ -3,7 +3,6 @@ import { deleteTodo } from '../../store/actions'
 import './Render-todos.css'
 
 function RenderTodos({ todos, removeTodo }) {
-    console.log("render=>>", todos)
 
     return (
         <div>

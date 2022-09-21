@@ -13,8 +13,7 @@ function AddTodo({ addNewTodo }) {
     }
 
     const addTodo = () => {
-        let newTodo = { title: todoValue }
-        addNewTodo(newTodo)
+        addNewTodo(todoValue)
         setTodoValue("")
     }
 
@@ -28,7 +27,7 @@ function AddTodo({ addNewTodo }) {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    
+
     addNewTodo: (todo) => dispatch(addTodo(todo))
 })
 

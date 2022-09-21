@@ -1,5 +1,7 @@
-const addTodo = (todo) => {
-    return (dispatch) => dispatch({ type: "addTodo", data: todo })
+const addTodo = (todoValue) => {
+    let newTodo = { title: todoValue }
+    // addNewTodo(newTodo)
+    return (dispatch) => dispatch({ type: "addTodo", data: newTodo })
 }
 
 const deleteTodo = (todos, index) => {

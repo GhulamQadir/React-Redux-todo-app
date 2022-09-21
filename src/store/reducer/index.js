@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
         case "deleteTodo":
             return ({
                 ...state,
-                todos: action.data,
+                todos: [...action.data],
             })
     }
     return state;
