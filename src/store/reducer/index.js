@@ -1,5 +1,5 @@
 const initialState = {
-    todos: [{ title: "First todo" }, { title: "redux learning" }],
+    todos: [{ title: "First todo", isEdit: false }, { title: "redux learning", isEdit: false }],
 }
 
 
@@ -16,6 +16,21 @@ export default (state = initialState, action) => {
                 ...state,
                 todos: [...action.data],
             })
+
+        case "editTodo":
+            return ({
+                ...state,
+                todos: [...action.data],
+            })
+
+
+        case "updateTodo":
+            return ({
+                ...state,
+                todos: [...action.data],
+            })
+
+
     }
     return state;
 }
