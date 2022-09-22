@@ -12,3 +12,8 @@ h3 {
 p {
     display: inline;
 }
+
+.todoChecked {
+    text-decoration: line-through;
+    color: purple;
+}

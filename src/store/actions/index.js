@@ -1,5 +1,5 @@
 const addTodo = (todoValue) => {
-    let newTodo = { title: todoValue, isEdit: false }
+    let newTodo = { title: todoValue, isEdit: false, isTodoChecked: false }
     return (dispatch) => dispatch({ type: "addTodo", data: newTodo })
 }
 
@@ -25,9 +25,17 @@ const updateTodo = (todos, index, updatedTodoValue) => {
     todos = myTodos
 
     return (dispatch) => dispatch({ type: "updateTodo", data: todos })
+}
+
+
+const todoChecked = (todos, index, value) => {
+    let myTodos = todos
+    myTodos[index].isTodoChecked = value
+    todos = myTodos
+    console.log(todos)
+    return (dispatch) => dispatch({ type: "isTodoChecked", data: todos })
 
 }
 
 
-
-export { addTodo, deleteTodo, editTodoInput, updateTodo }
+export { addTodo, deleteTodo, editTodoInput, updateTodo, todoChecked }
