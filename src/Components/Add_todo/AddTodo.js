@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import './AddTodo.css'
 import { addTodo } from "../../store/actions";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
 
-function AddTodo({ addNewTodo }) {
+function AddTodo({ todos, addNewTodo }) {
     const [todoValue, setTodoValue] = useState("")
     const todoValueOnChange = (value) => {
         setTodoValue(value)
@@ -14,8 +14,15 @@ function AddTodo({ addNewTodo }) {
 
     const addTodo = () => {
         addNewTodo(todoValue)
+        localStorage.setItem("todos", JSON.stringify(todos))
         setTodoValue("")
     }
+
+    useEffect(() => {
+        todos = JSON.parse(localStorage.getItem('todos'))
+        console.log("ma=>>", todos)
+    }, [])
+
 
     return (
         <div>
@@ -25,10 +32,13 @@ function AddTodo({ addNewTodo }) {
     )
 }
 
+const mapStateToProps = (state) => ({
+    todos: state.todos
+})
 
 const mapDispatchToProps = (dispatch) => ({
 
     addNewTodo: (todo) => dispatch(addTodo(todo))
 })
 
-export default connect(null, mapDispatchToProps)(AddTodo);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);

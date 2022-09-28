@@ -1,11 +1,10 @@
 import { connect } from 'react-redux'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { deleteTodo, editTodoInput, todoChecked, updateTodo } from '../../store/actions'
 import './Render-todos.css'
 
 function RenderTodos({ todos, removeTodo, todoInputOnEdit, editTodo, isTodoCompleted }) {
     const [todoUpdateValue, setTodoUpdateValue] = useState("")
-    const [todoCheck, isTodoCheck] = useState(false)
 
     const updatedTodoValueOnChange = (e) => {
         setTodoUpdateValue(e.target.value)
@@ -24,7 +23,7 @@ function RenderTodos({ todos, removeTodo, todoInputOnEdit, editTodo, isTodoCompl
             <div>{todos.map((todo, index) => {
                 return <div key={index}>
                     <li>
-                        <input onClick={() => { }} checked={todos[index].isTodoChecked} type="radio" onChange={(e) => isTodoCompleted(todos, index, e.target.checked)} />
+                        <input readOnly type="radio" checked={todos[index].isTodoChecked} onClick={() => isTodoCompleted(todos, index)} />
                         {todos[index].isEdit ? <input placeholder='Enter value' onChange={(e) => updatedTodoValueOnChange(e)} defaultValue={todos[index].title} type="text" /> : <h3 className={todos[index].isTodoChecked ? "todoChecked" : "todo"}>{todo.title}</h3>}
                         {todos[index].isEdit ? <button onClick={() => editTodo(todos, index, todoUpdateValue)
                         }>Update</button>

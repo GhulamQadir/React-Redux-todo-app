@@ -28,9 +28,9 @@ const updateTodo = (todos, index, updatedTodoValue) => {
 }
 
 
-const todoChecked = (todos, index, value) => {
+const todoChecked = (todos, index,) => {
     let myTodos = todos
-    myTodos[index].isTodoChecked = value
+    myTodos[index].isTodoChecked = !(myTodos[index].isTodoChecked)
     todos = myTodos
     console.log(todos)
     return (dispatch) => dispatch({ type: "isTodoChecked", data: todos })
