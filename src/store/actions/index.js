@@ -37,5 +37,9 @@ const todoChecked = (todos, index,) => {
 
 }
 
+const getTodosFromLocalStorage = (getTodos) => {
+    return (dispatch) => dispatch({ type: "getTodosFromLocalStorage", data: getTodos })
+}
 
-export { addTodo, deleteTodo, editTodoInput, updateTodo, todoChecked }
+
+export { addTodo, deleteTodo, editTodoInput, updateTodo, todoChecked, getTodosFromLocalStorage }

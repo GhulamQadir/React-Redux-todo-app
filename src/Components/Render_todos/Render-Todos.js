@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { deleteTodo, editTodoInput, todoChecked, updateTodo } from '../../store/actions'
+import { deleteTodo, editTodoInput, getTodosFromLocalStorage, todoChecked, updateTodo } from '../../store/actions'
 import './Render-todos.css'
 
-function RenderTodos({ todos, removeTodo, todoInputOnEdit, editTodo, isTodoCompleted }) {
+function RenderTodos({ todos, removeTodo, todoInputOnEdit, editTodo, isTodoCompleted, gettingTodos }) {
     const [todoUpdateValue, setTodoUpdateValue] = useState("")
 
     const updatedTodoValueOnChange = (e) => {
@@ -15,6 +15,16 @@ function RenderTodos({ todos, removeTodo, todoInputOnEdit, editTodo, isTodoCompl
         setTodoUpdateValue(todos[index].title)
         console.log(todoUpdateValue)
     }
+
+    useEffect(() => {
+        let myTodos = JSON.parse(localStorage.getItem('todos'))
+
+        gettingTodos(myTodos ?? [])
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos))
+    })
 
     return (
         <div>
@@ -47,6 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
     removeTodo: (todos, index) => dispatch(deleteTodo(todos, index)),
     todoInputOnEdit: (todos, index) => dispatch(editTodoInput(todos, index)),
     editTodo: (todos, index, updatedTodoValue) => dispatch(updateTodo(todos, index, updatedTodoValue)),
-    isTodoCompleted: (todos, index, value) => dispatch(todoChecked(todos, index, value))
+    isTodoCompleted: (todos, index, value) => dispatch(todoChecked(todos, index, value)),
+    gettingTodos: (todos) => dispatch(getTodosFromLocalStorage(todos))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(RenderTodos);

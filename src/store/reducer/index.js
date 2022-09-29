@@ -39,6 +39,13 @@ export default (state = initialState, action) => {
             })
 
 
+        case "getTodosFromLocalStorage":
+            return ({
+                ...state,
+                todos: action.data,
+            })
+
+
     }
     return state;
 }

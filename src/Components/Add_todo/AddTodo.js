@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 
 
-function AddTodo({ todos, addNewTodo }) {
+function AddTodo({ addNewTodo, }) {
     const [todoValue, setTodoValue] = useState("")
     const todoValueOnChange = (value) => {
         setTodoValue(value)
@@ -14,15 +14,8 @@ function AddTodo({ todos, addNewTodo }) {
 
     const addTodo = () => {
         addNewTodo(todoValue)
-        localStorage.setItem("todos", JSON.stringify(todos))
         setTodoValue("")
     }
-
-    useEffect(() => {
-        todos = JSON.parse(localStorage.getItem('todos'))
-        console.log("ma=>>", todos)
-    }, [])
-
 
     return (
         <div>
@@ -32,13 +25,10 @@ function AddTodo({ todos, addNewTodo }) {
     )
 }
 
-const mapStateToProps = (state) => ({
-    todos: state.todos
-})
+
 
 const mapDispatchToProps = (dispatch) => ({
-
     addNewTodo: (todo) => dispatch(addTodo(todo))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
+export default connect(null, mapDispatchToProps)(AddTodo);
