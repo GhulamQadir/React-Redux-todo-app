@@ -34,12 +34,20 @@ const todoChecked = (todos, index,) => {
     todos = myTodos
     console.log(todos)
     return (dispatch) => dispatch({ type: "isTodoChecked", data: todos })
-
-}
-
-const getTodosFromLocalStorage = (getTodos) => {
-    return (dispatch) => dispatch({ type: "getTodosFromLocalStorage", data: getTodos })
 }
 
 
-export { addTodo, deleteTodo, editTodoInput, updateTodo, todoChecked, getTodosFromLocalStorage }
+const isEditFalseForAllTodos = (todos) => {
+    let myTodos = todos
+
+    for (let i = 0; i < myTodos.length; i++) {
+        myTodos[i].isEdit = false
+        todos = myTodos
+    }
+
+    return (dispatch) => dispatch({ type: "editFalseForAll", data: todos })
+}
+
+
+
+export { addTodo, deleteTodo, editTodoInput, updateTodo, todoChecked, isEditFalseForAllTodos }

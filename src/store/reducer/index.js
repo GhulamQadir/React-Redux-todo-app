@@ -39,10 +39,10 @@ export default (state = initialState, action) => {
             })
 
 
-        case "getTodosFromLocalStorage":
+        case "editFalseForAll":
             return ({
                 ...state,
-                todos: action.data,
+                todos: [...action.data],
             })
 
 

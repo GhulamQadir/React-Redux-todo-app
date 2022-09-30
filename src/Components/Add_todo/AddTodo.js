@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import './AddTodo.css'
 import { addTodo } from "../../store/actions";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 
